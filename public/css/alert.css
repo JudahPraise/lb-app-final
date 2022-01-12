@@ -1,0 +1,29 @@
+
+.is-visible {
+    opacity: 1;
+}
+.is-hidden {
+  opacity: 0;
+}
+.is-removed {
+  display: none;
+}
+#message {
+  position: fixed;
+  z-index: 12;
+  bottom: 3rem;
+  right: 1rem;
+  width: 25rem;
+  height: 5rem;
+  padding: 20px;
+  background-color: #343434;
+  margin-top: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  color: white;
+}

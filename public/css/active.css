@@ -1,0 +1,7 @@
+.selected_option{
+    background-color: #2098D1;
+    color: white;
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+}
+

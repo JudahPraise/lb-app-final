@@ -1,0 +1,40 @@
+.steps-container {
+    padding: 10px;
+    transform: translate(0%, 0%);
+  }
+.steps {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+  }
+  .step {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #ACACA6;
+    border-radius: 50%;
+    transition: background 1s;
+  }
+  .step.selected {
+    border: 2px solid #4B81BD;   
+  }
+  .step.completed {
+    border: 2px solid #4B81BD;
+    background: #4B81BD; 
+  }
+  .step-progress {
+    position: absolute;
+    width: 60%;
+    height: 30%;
+    border-bottom: 0px solid #ACACA6;
+    z-index: -1;
+  }
+  .percent {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    border-bottom: 2px solid #4B81BD;
+    z-index: 1;
+    transition: width 1s;
+  }
