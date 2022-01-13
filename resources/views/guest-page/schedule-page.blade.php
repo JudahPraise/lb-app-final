@@ -9,7 +9,7 @@
         </div>
         <div class="row row-cols-1 row-cols-md-2 w-75">
         @forelse ($schedules as $schedule)
-                <a class="position-card text-dark">
+                <a class="interview-card text-dark">
                 
                     <div class="col">
                         <div class="card card2 m-2">
