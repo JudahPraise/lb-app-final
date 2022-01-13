@@ -6,7 +6,9 @@ use App\Models\Skill;
 use App\Models\Position;
 use App\Models\SetSkill;
 use App\Models\SkillResult;
+use App\Models\Result;
 use App\Models\Registration;
+use App\Models\QualificationResult;
 use Illuminate\Http\Request;
 use App\Models\SkillTestForm;
 use App\Models\SetQualification;
@@ -77,11 +79,42 @@ class SkillsTest extends Controller
             return redirect()->back()->with(compact('answers'));
         }
 
-        $qualified_points = SetQualification::where('position_id','=',$id)->sum('point');
+
+        $examresult = skillTestForm::where([
+            ['registration_id','=',$reg_id],
+        ['skill_id','=',$request->skill_id]])->sum('points');
+        
+        Result::where('registration_id','=',$reg_id)->update(['exam'=> $examresult,]);
+        
+     
 
         //Dito yung redirect pre ikaw na sa condition para mapractice ka haha
-        dd('Choose Schedule');
 
+
+        $qualified_points = SetQualification::where('position_id','=',$id)->sum('point');
         
+        $exam_points = SetSkill::where('position_id','=',$id)->sum('points');
+        
+        $point = Result::where('registration_id','=',$reg_id)->first();
+        
+         
+            //if($exam_points > $point->exam && $qualified_points > $point->qualification)
+            //{
+            //    dd("fail");
+            //}
+            //dd("pass");
+
+
+
+            if($exam_points > $point->exam)
+            {
+                dd("bagsak na talaga");
+            }
+            if($qualified_points > $point->qualification)
+            {
+                dd("suggest position");
+            }
+
+            return redirect()->route('interview.Schedule', ['id'=>$id, 'reg_id'=>$reg_id]);
     }
 }

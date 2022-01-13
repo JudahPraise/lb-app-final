@@ -99,5 +99,5 @@ Route::get('/skills-test/{id}/{reg_id}', [App\Http\Controllers\SkillsTest::class
 Route::post('/skills-test/store/{id}/{reg_id}', [App\Http\Controllers\SkillsTest::class, 'store'])->name('applicant.skillstest.store');
 
 //Schedule
-
+Route::get('/schedule/{id}/{reg_id}', [App\Http\Controllers\ScheduleController::class, 'index'])->name('interview.Schedule');
 
