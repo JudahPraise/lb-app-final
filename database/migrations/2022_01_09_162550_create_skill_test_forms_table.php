@@ -15,7 +15,8 @@ class CreateSkillTestFormsTable extends Migration
     {
         Schema::create('skill_test_forms', function (Blueprint $table) {
             $table->id();
-            $table->integer('registration_id');
+            $table->unsignedBigInteger('registration_id');
+            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
             $table->integer('skill_id');
             $table->integer('choice_id');
             $table->integer('points');

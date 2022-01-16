@@ -26,7 +26,8 @@
                                 <h4 style="font-size: 1rem; font-weight: bold">{{ $data->qualification->title }}</h4>
                             </div>
                             <div id="inputContainer">
-                                        
+                                {{-- <input type="number" name="registration_id[]" value="" id="{{ 'regid'.$data->qualification->id }}" >
+                                <input type="number" name="points[]" value="" id="{{ 'points'.$data->qualification->id }}" > --}}
                             </div>
                             <div class="card-body">
                                 <div class="row row-cols-1 row-cols-md-3 d-flex flex-column">
@@ -34,9 +35,11 @@
                                         <div class="col shadow p-3 m-2 rounded hvr-fade hvr-float option"
                                         data-registrationid="{{ $registration->id }}"
                                         data-point="{{ $option['point'] }}"
+                                        data-option="{{ $loop->index }}"
                                         >
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="points[]" id="{{ $option['option'] }}" value="{{ $data->qualified_option === $option['option'] ? $data->point : '0' }}"
+                                                <input class="form-check-input" type="checkbox" name="points[]" id="{{ $option['option'] }}" 
+                                                value="{{ $data->qualified_option === $option['option'] ? $data->point : '0' }}"
                                                 hidden>
                                                 <label class="form-check-label" for="points" style="font-size: 1rem; font-weight: bold">
                                                     {{ $option['option'] }}
@@ -58,12 +61,22 @@
 <script src="{{ asset('jquery/jquery.js') }}"></script>
 <script>
     $(document).ready(function(){
+
         $('.option').each(function() {
           $(this).click(function(event){
-            $(this).addClass('selected_option');
-            console.log('get');
-            var html = ' <input type="number" name="registration_id[]" value="'+$(this).data('registrationid')+'" ><input type="number" name="points[]" value="'+$(this).data('point')+'" >'
-            $('#inputContainer').append(html);
+                var html = ' <input type="number" name="registration_id[]" value="'+$(this).data('registrationid')+'" id="reg'+$(this).data('option')+'" hidden><input type="number" name="points[]" value="'+$(this).data('point')+'" id="point'+$(this).data('option')+'" hidden>'
+                if($(this).hasClass('selected_option') )
+                {
+                    $(this).removeClass('selected_option');
+                    $('#reg'+$(this).data('option')+'').remove()
+                    $('#point'+$(this).data('option')+'').remove()
+                }
+                else
+                {
+                    $(this).addClass('selected_option');
+                    $('#inputContainer').append(html);
+                
+                }
           })
         })
     })

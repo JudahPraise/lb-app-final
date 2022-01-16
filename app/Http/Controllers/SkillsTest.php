@@ -80,41 +80,25 @@ class SkillsTest extends Controller
         }
 
 
-        $examresult = skillTestForm::where([
-            ['registration_id','=',$reg_id],
-        ['skill_id','=',$request->skill_id]])->sum('points');
+        $examresult = SkillResult::where('registration_id','=',$reg_id)->sum('points');
         
         Result::where('registration_id','=',$reg_id)->update(['exam'=> $examresult,]);
         
-     
 
         //Dito yung redirect pre ikaw na sa condition para mapractice ka haha
 
 
         $qualified_points = SetQualification::where('position_id','=',$id)->sum('point');
-        
         $exam_points = SetSkill::where('position_id','=',$id)->sum('points');
+        $results = Result::where('registration_id','=',$reg_id)->first();
+
         
-        $point = Result::where('registration_id','=',$reg_id)->first();
-        
-         
-            //if($exam_points > $point->exam && $qualified_points > $point->qualification)
-            //{
-            //    dd("fail");
-            //}
-            //dd("pass");
 
+        if($results->qualification < $exam_points)
+        {
+            dd("suggest");
+        }
 
-
-            if($exam_points > $point->exam)
-            {
-                dd("bagsak na talaga");
-            }
-            if($qualified_points > $point->qualification)
-            {
-                dd("suggest position");
-            }
-
-            return redirect()->route('interview.Schedule', ['id'=>$id, 'reg_id'=>$reg_id]);
+        return redirect()->route('interview.Schedule', ['id'=>$id, 'reg_id'=>$reg_id]);
     }
 }
