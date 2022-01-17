@@ -101,3 +101,7 @@ Route::post('/skills-test/store/{id}/{reg_id}', [App\Http\Controllers\SkillsTest
 //Schedule
 Route::get('/schedule/{id}/{reg_id}', [App\Http\Controllers\ScheduleController::class, 'index'])->name('interview.Schedule');
 
+//Failed
+Route::get('/other-positions/{id}/{reg_id}', [App\Http\Controllers\OherPositionController::class, 'index'])->name('other.position');
+Route::get('/apply-other-position/{id}/{reg_id}', [App\Http\Controllers\OherPositionController::class, 'store'])->name('other.position.apply');
+

@@ -96,7 +96,7 @@ class SkillsTest extends Controller
 
         if($results->qualification < $exam_points)
         {
-            dd("suggest");
+            return redirect()->route('other.position', ['id'=>$id, 'reg_id'=>$reg_id]);
         }
 
         return redirect()->route('interview.Schedule', ['id'=>$id, 'reg_id'=>$reg_id]);

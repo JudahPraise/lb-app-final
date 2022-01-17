@@ -3,30 +3,29 @@
 @section('qualifications')
 <div class="card-columns">
     @foreach ($schedules as $schedule)
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h5 class="my-0 font-weight-normal text-center">Available Schedule</h5>
-            </div>
-            <div class="card-body d-flex flex-column align-items-center">
-                <h2 class="card-title pricing-card-title">{{ $schedule->getDay() }}</h2>
-                <small>{{ $schedule->getDate() }}</small>
-                <small>{{ $schedule->getTimeFrom() }} - {{ $schedule->getTimeTo() }}</small>
-                <span class="iconify mt-3" data-icon="logos:google-meet" data-width="50" data-height="50"></span>
-                <small><strong>via</strong> Google Meet</small>
-
-                <div class="container p-3 d-flex flex-column align-items-center">
-                    <strong>Meeting Link</strong>
-                    <a href="https://{{ $schedule->link }}">{{ $schedule->link }}</a>
-                </div>
-               <div class="row">
-                    <button type="button" class="btn btn-primary m-1">Edit</button>
-                    <button type="button" class="btn btn-danger m-1 delete-schedule"
-                    data-toggle="modal" data-target="#deleteModal"
-                    data-schedid="{{ $schedule->id }}"
-                    >Delete</button>
-               </div>
-            </div>
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h5 class="my-0 font-weight-normal text-center">Available Schedule</h5>
         </div>
+        <div class="card-body d-flex flex-column align-items-center">
+            <h2 class="card-title pricing-card-title">{{ $schedule->getDay() }}</h2>
+            <small>{{ $schedule->getDate() }}</small>
+            <small>{{ $schedule->getTimeFrom() }} - {{ $schedule->getTimeTo() }}</small>
+            <span class="iconify mt-3" data-icon="logos:google-meet" data-width="50" data-height="50"></span>
+            <small><strong>via</strong> Google Meet</small>
+            <div class="container p-3 d-flex flex-column align-items-center">
+                <strong>Meeting Link</strong>
+                <a href="https://{{ $schedule->link }}">{{ $schedule->link }}</a>
+            </div>
+           <div class="row">
+                <button type="button" class="btn btn-primary m-1">Edit</button>
+                <button type="button" class="btn btn-danger m-1 delete-schedule"
+                data-toggle="modal" data-target="#deleteModal"
+                data-schedid="{{ $schedule->id }}"
+                >Delete</button>
+           </div>
+        </div>
+      </div>
     @endforeach
 </div>
 @if ($schedules->isEmpty())

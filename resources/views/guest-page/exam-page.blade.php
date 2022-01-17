@@ -41,7 +41,7 @@
                     @csrf
                     <div class="row row-cols-1 row-cols-md-2 d-flex flex-column">
                       <div id="inputContainer">  
-                        <input type="text" id="id" name="skill_id" value="{{ $skill->skills->id }}">                
+                        <input type="text" id="id" name="skill_id" value="{{ $skill->skills->id }}" hidden>                
                       </div>
                       @forelse ($skill->skills->questions as $question)
                       <span class="mb-2">
@@ -50,11 +50,11 @@
                       </span>
                       <span>
                         <ul id="question{{ $question->id }}">
-                          <input type="number" id="id" name="question_id" value="{{ $question->id }}">     
-                          <input type="number" id="choiceId{{ $question->id }}" name="choice_id[]" value="">     
+                          <input type="number" id="id" name="question_id" value="{{ $question->id }}" hidden>     
+                          <input type="number" id="choiceId{{ $question->id }}" name="choice_id[]" value="" hidden>     
                           @foreach ($question->choices as $choice)
                             <div class="form-check">
-                              <input class="form-check-input choice" type="radio" name="{{ $question->id }}" id="{{   $choice->choice }}" value="{{ $choice->points }}" data-questionid="{{ $question->id }}"   data-choiceid="{{ $choice->id }}" {{ $answers->contains('choice_id', $choice->id) ? 'checked' : '' }}>
+                              <input class="form-check-input choice" type="radio" name="{{ $question->id }}" id="{{   $choice->choice }}" value="{{ $choice->points }}" data-questionid="{{ $question->id }}"   data-choiceid="{{ $choice->id }}" {{ $answers->contains('choice_id', $choice->id) ? 'checked' : '' }} >
                               <label class="form-check-label" for="{{ $choice->choice }}">
                                 {{ $choice->choice }}
                               </label>
@@ -88,7 +88,7 @@
           // $('#totalPoint').val(total);
           // console.log(total);
           $('#point'+$(this).data('questionid')+'').remove();
-          var html = '<input type="number" id="point'+$(this).data('questionid')+'" name="point[]" value="'+$(this).val()+'">'
+          var html = '<input type="number" id="point'+$(this).data('questionid')+'" name="point[]" value="'+$(this).val()+'" hidden>'
           $('#question'+$(this).data('questionid')+'').append(html);
           $('#choiceId'+$(this).data('questionid')+'').val($(this).data('choiceid'));
         })
