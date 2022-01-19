@@ -16,6 +16,7 @@ class CreateAddQualificationsTable extends Migration
         Schema::create('add_qualifications', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('tag');
             $table->json('options');
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ class SetQualificationController extends Controller
     public function index($id)
     {
         $position = Position::where('id','=',$id)->first();
-        $qualifications = AddQualifications::all();
+        $qualifications = AddQualifications::where('tag','=',$position->position)->orWhere('tag','=','All')->get();
 
         return view('position.background_create', compact('position','qualifications'));
     }

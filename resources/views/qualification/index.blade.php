@@ -74,13 +74,24 @@
                       <label for="exampleInputEmail1">Qulification Title</label>
                       <input type="text" class="form-control" name="title" id="exampleInputEmail1">
                     </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Tags</label>
+                      <select class="form-control" name="tag">
+                        <option value="All">All</option>
+                        @if (!empty($positions))
+                          @foreach ($positions as $position)
+                            <option value="{{ $position->position }}">{{ $position->position }}</option>
+                          @endforeach
+                        @endif
+                      </select>
+                    </div>
                     <div class="form-group inputs_div">
                         <div class="form-row mb-3 d-flex align-items-end">
                             <div class="col-8">
                                 <label for="exampleInputEmail1">Qualified Option</label>
                                 <small class="text-success font-italic"><span class="text-danger">*</span>Start from least</small>
-                                <input type="number" class="form-control" name="options[{{ 0 }}][point]" value="{{ 10 }}" id="exampleInputEmail1" hidden>
-                                <input type="text" class="form-control" name="options[{{ 0 }}][option]"  id="exampleInputEmail1">
+                                <input type="number" class="form-control" name="options[{{ 0 }}][point]" value="{{ 10 }}"  hidden>
+                                <input type="text" class="form-control" name="options[{{ 0 }}][option]"  >
                             </div>
                             <button type="button" class="btn btn-success add">Add option</button>
                         </div>
@@ -129,7 +140,7 @@
     $(this).on("click", ".add", function(){
       i ++;
       value += 10;
-      var html = '<div class="form-row mb-3 d-flex align-items-end"><div class="col-8"><label for="exampleInputEmail1">Qualified Option</label><small class="text-success font-italic"><span class="text-danger">*</span>Start from least</small><input type="number" class="form-control" name="options[ '+ i +' ][point]" value='+ value +' id="exampleInputEmail1" hidden><input type="text" class="form-control" name="options[ '+ i +' ][option]"  id="exampleInputEmail1"></div><button class="btn btn-danger remove ">Remove Option</button></div>'
+      var html = '<div class="form-row mb-3 d-flex align-items-end"><div class="col-8"><input type="number" class="form-control" name="options[ '+ i +' ][point]" value='+ value +' hidden><input type="text" class="form-control" name="options[ '+ i +' ][option]"  ></div><button class="btn btn-danger remove ">Remove Option</button></div>'
       console.log('get');
       $('.inputs_div').append(html);
     // console.log('hello');

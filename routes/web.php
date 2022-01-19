@@ -26,6 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Dashboard
 Route::prefix('/dashboard')->group(function(){
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/show/{id}', [App\Http\Controllers\DashboardController::class, 'show'])->name('dashboard.show');
 });
 //Position
 Route::prefix('/position')->group(function(){

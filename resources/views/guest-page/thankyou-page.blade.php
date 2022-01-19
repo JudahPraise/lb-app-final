@@ -3,16 +3,8 @@
 @section('main')
 
 <div class="container-fluid d-flex justify-content-center align-items-center w-100" style="height: 80vh">
-    {{-- <div class="row w-75" style="height: 76.3vh;">
-        <div class="col-md-6 d-none d-sm-block p-md-5">
-            <img src="{{ asset('images/success.png') }}" alt="" srcset="" style="width: 100%; height: 100%">
-        </div>
-        <div class="col-md-6 p-md-5 d-flex align-items-center">
-           
-        </div>
-    </div> --}}
     <div class="card shadow border p-5 d-flex justify-content-center align-items-center" style="width: 40%">
-        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 123 94.09" style="width: 100px">
+      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 123 94.09" style="width: 100px">
             <defs>
               <style>
                 .cls-1 {
@@ -166,14 +158,13 @@
             <circle id="blue-dot-2" class="cls-1 dot" cx="79.3" cy="54.29" r="2"/>
             
           </svg>
-        <h1 style="font-size: 2.5rem; font-weight: bold; font-family: 'Poppins', sans-serif;">Congratulations!</h1>
-        <p>We've sent you an email with a link to your scheduled interview. 🎉</p>
-        <br>
-        <p>Thank you!</p>
-        <br>
-        <br>
-        <a href="{{ route('welcome') }}" class="btn btn-dark">Back to homepage</a>
-        
+      <h1 style="font-size: 2.5rem; font-weight: bold; font-family: 'Poppins', sans-serif;">Congratulations!</h1>
+      <p>We've sent you an email with a link to your scheduled interview. 🎉</p>
+      <br>
+      <p>Thank you!</p>
+      <br>
+      <br>
+      <a href="{{ route('welcome') }}" class="btn btn-dark">Back to homepage</a>
     </div>
 </div>
     

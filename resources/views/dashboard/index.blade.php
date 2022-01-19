@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    @if ($registrations->isEmpty())
+                    @if ($passers->isEmpty())
                     <div class="container-fluid d-flex flex-column align-items-center" data-toggle="modal" data-target="#exampleModal">
                         <img src="{{ asset('svg/undraw_empty_street.svg') }}" alt="" srcset="" height="250" width="250">
                         <span>Nothing in here</span>
@@ -18,22 +18,21 @@
                       <thead>
                         <tr>
                           <th>Name</th>
-                          <th>Contact number</th>
+                          <th>Interview</th>
                           <th>Email address</th>
                           <th>Position</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($registrations as $registration)
+                        @foreach ($passers as $data)
                           <tr>
-                              <td>{{ $registration->getFullname() }}</td>
-                              <td>{{ $registration->contact_no }}</td>
-                              <td>{{ $registration->email_address }}</td>
-                              <td>{{ $registration->getPosition() }}</td>
+                              <td>{{ $data->registration->getFullname() }}</td>
+                              <td>{{ $data->schedule->getDate() }} - {{ $data->schedule->getTime() }}</td>
+                              <td>{{ $data->registration->email_address }}</td>
+                              <td>{{ $data->registration->getPosition() }}</td>
                               <td>
-                                  <button class="btn btn-sm btn-primary update-schedule">Edit</button>
-                                  <button class="btn btn-sm btn-danger delete-schedule">Delete</button>
+                                  <a href="{{ route('dashboard.show', $data->registration->id) }}" class="btn btn-sm btn-primary update-schedule">Show</a>
                               </td>
                           </tr>
                         @endforeach

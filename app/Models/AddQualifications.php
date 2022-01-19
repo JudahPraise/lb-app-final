@@ -13,7 +13,7 @@ class AddQualifications extends Model
         'options' => 'array'
     ];
 
-    protected $fillable = ['title','options'];
+    protected $fillable = ['tag','title','options'];
 
     public function setQualification()
     {

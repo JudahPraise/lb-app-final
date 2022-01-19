@@ -17,6 +17,11 @@ class Schedule extends Model
         return $this->belongsTo(Position::class);
     }
 
+    public function result()
+    {
+        return $this->hasMany(Result::class);
+    }
+
     public function getDate() {
 
         if(!empty($this->date))

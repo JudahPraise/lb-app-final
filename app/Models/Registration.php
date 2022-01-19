@@ -13,7 +13,7 @@ class Registration extends Model
 
     public function getFullname()
     {
-        return $this->lastname.','.$this->firstname.','.$this->middlename;
+        return $this->firstname.' '.$this->middlename.' '.$this->lastname;
     }
 
     public function getPosition()
@@ -22,6 +22,11 @@ class Registration extends Model
         $position = Position::where('id','=',$this->position_id)->select('position')->first();
 
         return $position->position;
+    }
+
+    public function result()
+    {
+        return $this->hasOne(Result::class);
     }
     
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Position;
 use Illuminate\Http\Request;
 use App\Models\SetQualification;
 use App\Models\AddQualifications;
@@ -16,8 +17,8 @@ class QualificationController extends Controller
     public function index()
     {
         $qualifications = AddQualifications::all();
-        // dd($qualifications);
-        return view('qualification.index', compact('qualifications'));
+        $positions = Position::all();
+        return view('qualification.index', compact('qualifications','positions'));
     }
 
     /**
@@ -42,6 +43,7 @@ class QualificationController extends Controller
         AddQualifications::create([
             'title' => $request->title,
             'options' => $request->options,
+            'tag' => $request->tag
         ]);
 
         return redirect()->back()->with('success', 'Qualification saved!');

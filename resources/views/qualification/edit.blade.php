@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <span>{{ __('Edit Qualification') }}</span>
+                    <span>'Edit Qualification</span>
                     <a href="{{ route('qualification.index') }}" class="btn btn-secondary">Back</a>
                 </div>
 
@@ -30,7 +30,8 @@
                             @foreach ($qualification->options as $option)
                                 <div class="form-row mb-3 d-flex align-items-end">
                                     <div class="col-8">
-                                        <input type="text" class="form-control" name="options[]" value="{{ $option }}" id="exampleInputEmail1">
+                                        <input type="text" class="form-control"  name="options[{{ $loop->index }}][option]" value="{{ $option['option'] }}" id="exampleInputEmail1">
+                                        <input type="text" class="form-control" name="options[{{ $loop->index }}][point]" value="{{ $option['point'] }}" id="exampleInputEmail1" hidden>
                                     </div>
                                     <button type="button" class="btn {{ $loop->index == 0 ? 'btn-success add' : 'btn-danger remove' }}">{{ $loop->index == 0 ? 'Add Option' : 'Remove Option' }}</button>
                                 </div>
@@ -45,11 +46,15 @@
 </div>
 <script>
   $(document).ready(function(){
+    var i = 0;
+    var value = 10;
     $(this).on("click", ".add", function(){
-      var html = '<div class="form-row mb-3 d-flex align-items-end"><div class="col-8"><input type="text" class="form-control" name="options[]" id="exampleInputEmail1"></div><button class="btn btn-danger remove ">Remove Option</button></div>'
-      console.log('get');
-      $('.inputs_div').append(html);
-    // console.log('hello');
+        i ++;
+        value += 10;
+        var html = '<div class="form-row mb-3 d-flex align-items-end"><div class="col-8"><input type="number" class="form-control" name="options[ '+ i +' ][point]" value='+ value +' id="exampleInputEmail1" hidden><input type="text" class="form-control"  name="options[ '+ i +' ][option]"  id="exampleInputEmail1"></div><button class="btn btn-danger remove ">Remove Option</  button></div>'
+        console.log('get');
+        $('.inputs_div').append(html);
+        // console.log('hello');
     });
     $(this).on("click", ".remove", function(){
       var target_input = $(this).parent();

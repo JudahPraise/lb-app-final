@@ -21,13 +21,13 @@
                         <fieldset>
                             @foreach($qualification->options as $option)
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="{{ $option['option'] }}  "id="exampleRadios1"  value="{{ $option['option'] }}"
+                                    <input class="form-check-input" type="radio" name="{{ $qualification->title }}  "id="exampleRadios1"  value="{{ $option['option'] }}"
                                         data-qualified="{{ $option['option'] }}"
                                         data-point="{{ $option['point'] }}"
                                         data-id="{{ $qualification->id }}"
                                         data-positionid="{{ $position->id }}"
                                     >
-                                    <label class="form-check-label" for="{{ $option['option'] }}">
+                                    <label class="form-check-label" for="{{ $qualification->title }}">
                                         {{ $option['option'] }}
                                     </label>
                                 </div> 
@@ -43,9 +43,9 @@
                 <span>Nothing in here</span>
             </div>
         @endforelse
+        <button class="btn btn-primary float-right" type="submit">Save</button>
     </div>
 
-    <button class="btn btn-primary float-right" type="submit">Save</button>
 </form>
 
 <script src="{{ asset('jquery/jquery.js') }}"></script>

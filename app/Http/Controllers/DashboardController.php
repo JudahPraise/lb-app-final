@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Result;
+use App\Models\Position;
+use App\Models\Schedule;
+use App\Models\SkillResult;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use App\Models\QualificationResult;
 
 class DashboardController extends Controller
 {
@@ -14,8 +19,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $registrations = Registration::all();
-        return view('dashboard.index', compact('registrations'));
+        $passers = Result::where('schedule_id','!=',null)->with('registration','schedule')->get();
+        // dd($passers);
+        return view('dashboard.index', compact('passers'));
     }
 
     /**
@@ -47,7 +53,12 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+        $applicant = Result::where('id','=',$id)->with('registration')->first();
+        $position = Position::where('id','=',$applicant->position_id)->first();
+        $interview = Schedule::where('id','=',$applicant->schedule_id)->first();
+        $qualification = QualificationResult::where('registration_id','=',$id)->first();
+        $exam = SkillResult::where('registration_id','=',$id)->first();
+        return view('dashboard.show', compact('applicant', 'position', 'qualification','exam','interview'));
     }
 
     /**
@@ -81,6 +92,7 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Registration::where('id','=',$id)->delete();
+        return redirect()->back()->with('delete', 'Record successfully deleted!');
     }
 }
