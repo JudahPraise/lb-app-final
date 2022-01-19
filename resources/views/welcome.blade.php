@@ -13,15 +13,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
-    <link href="{{ asset('css/hover-card.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/steps.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/selector.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/hover.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/active.css') }}">
-
+    <link href="{{ secure_asset('css/hover-card.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ secure_asset('css/steps.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/selector.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/hover.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/active.css') }}">
     </head>
 
     <body>
