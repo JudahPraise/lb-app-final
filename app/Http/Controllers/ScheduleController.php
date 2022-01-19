@@ -31,13 +31,23 @@ class ScheduleController extends Controller
     {
         $position = Position::where('id','=',$id)->first();
         $registration = Registration::where('id','=',$reg_id)->first();
-        $schedules = Schedule::where('position_id','=',$id)->get();
+        $schedule = Schedule::where('id','=',$sched_id)->first();
 
+        $job = $position->position;
+        $link = $schedule->link;
+        $date = $schedule->getDate();
+        $name = $registration->firstname;
+        $time = $schedule->getTime();
 
-        Mail::to($registration->email_address)->send(new ScheduleMail());
+        Mail::to($registration->email_address)->send(new ScheduleMail($job, $link, $date, $name, $time));
        
-        return view('guest-page.thankyou-page');
+        return redirect()->route('thankyou.index');
         
+    }
+
+    public function thankyou()
+    {
+        return view('guest-page.thankyou-page');
     }
 
 }

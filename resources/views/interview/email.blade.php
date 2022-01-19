@@ -1,11 +1,16 @@
 @component('mail::message')
-# Interview 
+# Good Day {{ $name }}!
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, quos. Quam atque corporis debitis nihil.
+# Congratulations 🎉
 
-@component('mail::button', ['url' => ''])
-Google Meet
-@endcomponent
+You passed the qualification and skills test for the position of {{ $job }},
+you are qualified for the interview on {{ $date }} at {{ $time }}
+
+This is the meeting link for your interview: <br>
+<a href="{{ $link }}">{{ $link }}</a>
+
+
+Good luck! 🎇
 
 Thanks<br>
 

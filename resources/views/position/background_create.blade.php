@@ -5,43 +5,38 @@
     @csrf
     @forelse ($qualifications as $qualification)
     <div class="accordion" id="accordionExample">
-            {{-- @foreach ($included as $item) --}}
-                {{-- @if ($qualification->id != $item->qualification_id) --}}
-                {{-- @if ($qualification->qualification) --}}
-                    <div class="card m-3">
-                        <div class="card-header d-flex justify-content-between" id="heading{{ $loop->index }}">
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="exampleRadios1" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
-                                    {{ $qualification->title }}
-                                </label>
-                                </div>
-                            </div>
-                            <div id="collapse{{ $loop->index }}" class="collapse show" aria-labelledby="heading{{ $loop->index }}" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    <div id="inputContainer">
-                                    
-                                    </div>
-                                    <fieldset>
-                                        @foreach($qualification->options as $option)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="{{ $option['option'] }}  "id="exampleRadios1"  value="{{ $option['option'] }}"
-                                                    data-qualified="{{ $option['option'] }}"
-                                                    data-point="{{ $option['point'] }}"
-                                                    data-id="{{ $qualification->id }}"
-                                                    data-positionid="{{ $position->id }}"
-                                                >
-                                                <label class="form-check-label" for="{{ $option['option'] }}">
-                                                    {{ $option['option'] }}
-                                                </label>
-                                            </div> 
-                                        @endforeach
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </div>
+        <div class="card m-3">
+            <div class="card-header d-flex justify-content-between" id="heading{{ $loop->index }}">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="exampleRadios1" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
+                        {{ $qualification->title }}
+                    </label>
                     </div>
-                {{-- @endIf --}}
-            {{-- @endforeach --}}
+                </div>
+                <div id="collapse{{ $loop->index }}" class="collapse show" aria-labelledby="heading{{ $loop->index }}" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div id="inputContainer">
+                        
+                        </div>
+                        <fieldset>
+                            @foreach($qualification->options as $option)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="{{ $option['option'] }}  "id="exampleRadios1"  value="{{ $option['option'] }}"
+                                        data-qualified="{{ $option['option'] }}"
+                                        data-point="{{ $option['point'] }}"
+                                        data-id="{{ $qualification->id }}"
+                                        data-positionid="{{ $position->id }}"
+                                    >
+                                    <label class="form-check-label" for="{{ $option['option'] }}">
+                                        {{ $option['option'] }}
+                                    </label>
+                                </div> 
+                            @endforeach
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
         @empty
             <div class="container-fluid d-flex flex-column align-items-center" data-toggle="modal" data-target="#exampleModal">
                 <img src="{{ asset('svg/undraw_empty_street.svg') }}" alt="" srcset="" height="250" width="250">

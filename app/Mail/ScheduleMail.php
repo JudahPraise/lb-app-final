@@ -10,15 +10,19 @@ use Illuminate\Queue\SerializesModels;
 class ScheduleMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $job, $link, $date, $name, $time;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($job, $link, $date, $name, $time)
     {
-        //
+        $this->job = $job;
+        $this->link = $link;
+        $this->date = $date;
+        $this->name = $name;
+        $this->time = $time;
     }
 
     /**
@@ -28,6 +32,11 @@ class ScheduleMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('interview.email');
+        return $this->markdown('interview.email')
+        ->with('job', $this->job)
+        ->with('link', $this->link)
+        ->with('date', $this->date)
+        ->with('name', $this->name)
+        ->with('time', $this->time);
     }
 }

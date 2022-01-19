@@ -9,11 +9,11 @@
           </div>
           <div class="steps">
             <div class="step {{ Route::currentRouteName() == 'register.index' ? 'selected' : '' }}" id="0"></div>
-            <div class="step {{ Route::currentRouteName() == 'register.show-positions' ? 'selected' : '' }}" id="1"></div>
+            <div class="step {{ Route::currentRouteName() == 'register.show-positions' || Route::currentRouteName() == 'other.position' ? 'selected' : '' }}" id="1"></div>
             <div class="step {{ Route::currentRouteName() == 'applicant.qualification' ? 'selected' : '' }}" id="2"></div>
             <div class="step {{ Route::currentRouteName() == 'applicant.skillstest' ? 'selected' : '' }}" id="3"></div>
             <div class="step {{ Route::currentRouteName() == 'interview.Schedule' ? 'selected' : '' }}" id="4"></div>
-            <div class="step" id="5"></div>
+            <div class="step {{ Route::currentRouteName() == 'thankyou.index' ? 'selected' : '' }}" id="5"></div>
           </div>
         </div>
     @endif

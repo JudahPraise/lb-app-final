@@ -113,4 +113,5 @@ Route::get('/apply-other-position/{id}/{reg_id}', [App\Http\Controllers\OherPosi
 
 
 Route::get('/registration-succesfull/{id}/{reg_id}/{sched_id}', [App\Http\Controllers\ScheduleController::class, 'getInterview'])->name('interview.email');
+Route::get('/back-to-home', [App\Http\Controllers\ScheduleController::class, 'thankyou'])->name('thankyou.index');
 

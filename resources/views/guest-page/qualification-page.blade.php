@@ -2,8 +2,8 @@
 
 @section('main')
 <div class="container">
-    <div class="row">
-        <div class="card">
+    <div class="row ">
+        <div class="card w-100">
             <div class="card-body">
               <span>
                 <h2 class="card-title">{{ $position->position }}</h2>
@@ -51,9 +51,10 @@
                             </div>
                         </div>
                     @endforeach
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
                 </div>
+
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>

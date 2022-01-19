@@ -19,10 +19,9 @@ class SetQualificationController extends Controller
     public function index($id)
     {
         $position = Position::where('id','=',$id)->first();
-        $qualifications = AddQualifications::doesntHave('setQualification')->get();
-        $included = SetQualification::with('qualification')->get();
-        
-        return view('position.background_create', compact('position','qualifications','included'));
+        $qualifications = AddQualifications::all();
+
+        return view('position.background_create', compact('position','qualifications'));
     }
 
     /**

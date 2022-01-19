@@ -44,7 +44,7 @@ class Schedule extends Model
     {
         if(!empty($this->date))
         {
-            return Carbon::parse($this->time_from)->isoFormat('h:mm a');;
+            return Carbon::parse($this->time_from)->isoFormat('h:mm a');
         }else
         {
             return 'null';
@@ -55,10 +55,18 @@ class Schedule extends Model
     {
         if(!empty($this->date))
         {
-            return Carbon::parse($this->time_to)->isoFormat('h:mm a');;
+            return Carbon::parse($this->time_to)->isoFormat('h:mm a');
         }else
         {
             return 'null';
         }
+    }
+
+    public function getTime()
+    {
+        $from = Carbon::parse($this->time_from)->isoFormat('h:mma');
+        $to = Carbon::parse($this->time_to)->isoFormat('h:mma');
+
+        return $from.' '.'-'.' '.$to;
     }
 }
