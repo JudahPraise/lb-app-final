@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -104,4 +105,12 @@ Route::get('/schedule/{id}/{reg_id}', [App\Http\Controllers\ScheduleController::
 //Failed
 Route::get('/other-positions/{id}/{reg_id}', [App\Http\Controllers\OherPositionController::class, 'index'])->name('other.position');
 Route::get('/apply-other-position/{id}/{reg_id}', [App\Http\Controllers\OherPositionController::class, 'store'])->name('other.position.apply');
+
+//Route::get('/email', function(){
+//    Mail::to('guest@test.com')->send(new ScheduleMail());
+//    return new ScheduleMail();
+//})->name('interview.email');
+
+
+Route::get('/registration-succesfull/{id}/{reg_id}/{sched_id}', [App\Http\Controllers\ScheduleController::class, 'getInterview'])->name('interview.email');
 

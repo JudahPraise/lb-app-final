@@ -10,7 +10,9 @@
     <div class="container">
         <div class="card-deck mb-3 text-center">
             @foreach ($schedules as $schedule)
-                <div class="card mb-4 shadow-sm">
+            <a href="{{ route('interview.email',['id' => $position->id, 'reg_id' => $registration->id, 'sched_id' => $schedule->id]) }}" class="schedule-card text-dark">
+            <div class="card mb-4 shadow-sm">
+           
                     <div class="card-header bg-dark text-white">
                       <h4 class="my-0 font-weight-normal">{{ $schedule->getDay() }}</h4>
                     </div>
@@ -20,10 +22,13 @@
                       <small style="font-size: 15px"><strong>via</strong> Google Meet</small>
                       <div class="container p-3 d-flex flex-column align-items-center">
                           <strong>Meeting Link</strong>
-                          <a href="https://{{ $schedule->link }}">{{ $schedule->link }}</a>
+                          <a href="">{{ $schedule->link }}</a>
                       </div>
                     </div>
+                    
                 </div>
+                </a>
+                
             @endforeach
         </div>
     </div>
