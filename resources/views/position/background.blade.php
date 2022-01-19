@@ -19,7 +19,7 @@
         @empty
         <a href="{{ route('setQualifcation.index', $position->id) }}">
             <div class="container-fluid d-flex flex-column align-items-center" data-toggle="modal" data-target="#exampleModal">
-                <img src="{{ asset('svg/undraw_add.svg') }}" alt="" srcset="" height="250" width="250">
+                <img src="{{ secure_asset('svg/undraw_add.svg') }}" alt="" srcset="" height="250" width="250">
                 <span>Add Qualification</span>
             </div>
         </a>

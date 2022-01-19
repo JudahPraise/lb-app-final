@@ -2,7 +2,7 @@
     <div class="container-fluid d-flex justify-content-center ">
         <div class="row m-md-5 w-75">
             <div class="col-md-6 d-none d-sm-block">
-                <img src="{{ asset('images/no-messages.png') }}" alt="" srcset="" style="width: 90%; height: 90%">
+                <img src="{{ secure_asset('images/no-messages.png') }}" alt="" srcset="" style="width: 90%; height: 90%">
             </div>
             <div class="col-md-6 d-flex flex-column justify-content-center">
                 <div class="container">

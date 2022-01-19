@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="col-md-6 d-none d-sm-block">
-            <img src="{{ asset('images/we-are-hiring.png') }}" alt="" srcset="" style="width: 90%; height: 90%">
+            <img src="{{ secure_asset('images/we-are-hiring.png') }}" alt="" srcset="" style="width: 90%; height: 90%">
         </div>
     </div>
 </div>

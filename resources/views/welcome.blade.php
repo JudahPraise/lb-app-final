@@ -32,8 +32,7 @@
 
     </body> 
     
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('jquery/jquery.js') }}"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="{{ secure_asset('js/app.js') }}" defer></script>
+    <script src="{{ secure_asset('jquery/jquery.js') }}"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" defer></script> -->
 </html>

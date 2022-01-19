@@ -54,7 +54,7 @@
               </span>
             @empty
                 <div class="container-fluid d-flex flex-column align-items-center" data-toggle="modal" data-target="#exampleModal">
-                    <img src="{{ asset('svg/undraw_empty_street.svg') }}" alt="" srcset="" height="250" width="250">
+                    <img src="{{ secure_asset('svg/undraw_empty_street.svg') }}" alt="" srcset="" height="250" width="250">
                     <span>Nothing in here</span>
                 </div>
             @endforelse
@@ -66,7 +66,7 @@
   @empty
       <a href="{{ route('setSkills.index', $position->id) }}">
           <div class="container-fluid d-flex flex-column align-items-center" data-toggle="modal" data-target="#exampleModal">
-              <img src="{{ asset('svg/undraw_add.svg') }}" alt="" srcset="" height="250" width="250">
+              <img src="{{ secure_asset('svg/undraw_add.svg') }}" alt="" srcset="" height="250" width="250">
               <span>Add Skills</span>
           </div>
       </a>

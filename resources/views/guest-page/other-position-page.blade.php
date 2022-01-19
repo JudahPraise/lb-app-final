@@ -25,6 +25,6 @@
     </div>
 </div>
 
-<script src="{{ asset('jquery/jquery.js') }}"></script>
+<script src="{{ secure_asset('jquery/jquery.js') }}"></script>
 
 @endsection

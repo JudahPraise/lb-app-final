@@ -66,7 +66,7 @@
                       <div class="container">
                         <div class="row py-2">
                           <div class="container-fluid d-flex flex-column align-items-center" data-toggle="modal" data-target="#addModal">
-                            <img src="{{ asset('svg/undraw_add.svg') }}" alt="" srcset="" height="250" width="250">
+                            <img src="{{ secure_asset('svg/undraw_add.svg') }}" alt="" srcset="" height="250" width="250">
                             <span>Add Questions</span>
                           </div>
                         </div>

@@ -6,7 +6,7 @@
         <div class="row w-75" style="height: 76.3vh;">
             <div class="col-md-6 d-none d-sm-block p-md-5">
                 <h2 class="d-flex align-items-center"><a href="{{ route('welcome') }}" class="text-dark"><i class="far fa-arrow-alt-circle-left mr-3" style="font-size: 17pt;"></i></a>REGISTER</h2>
-                <img src="{{ asset('images/build.png') }}" alt="" srcset="" style="width: 90%; height: 90%">
+                <img src="{{ secure_asset('images/build.png') }}" alt="" srcset="" style="width: 90%; height: 90%">
             </div>
             <div class="col-md-6 p-md-5 d-flex align-items-center">
                 <form action="{{ route('register.store') }}" method="POST"> 
