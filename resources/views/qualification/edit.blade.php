@@ -26,6 +26,17 @@
                           <label for="exampleInputEmail1">Qulification Title</label>
                           <input type="text" class="form-control" name="title" value="{{ $qualification->title }}" id="exampleInputEmail1">
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tags</label>
+                            <select class="form-control" name="tag">
+                              <option value="All" {{ $qualification->tag == "All"}}>All</option>
+                              @if (!empty($positions))
+                                @foreach ($positions as $position)
+                                  <option value="{{ $position->position }}" {{ $qualification->tag == $position->position }}>{{ $position->position }}</option>
+                                @endforeach
+                              @endif
+                            </select>
+                        </div>
                         <div class="form-group inputs_div">
                             @foreach ($qualification->options as $option)
                                 <div class="form-row mb-3 d-flex align-items-end">

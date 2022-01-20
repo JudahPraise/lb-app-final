@@ -34,12 +34,12 @@ class RegistrationController extends Controller
             return redirect()->route('register.show-positions', $registration->id)->with('success', 'Registered successfully!');
         }
 
-        return redirect()->back()->with('delete', sprintf('%f cannot apply!', $age->y));
+        return redirect()->back()->with('delete', 'Cannot apply');
     }
 
     public function showPositions($id)
     {
-        $positions = Position::all();
+        $positions = Position::with('qualifications','skills','schedule')->get();
         $registration = Registration::where('id','=',$id)->first();
         return view('guest-page.positions-page', compact('positions', 'registration'));
     }

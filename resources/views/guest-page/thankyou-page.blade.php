@@ -3,7 +3,7 @@
 @section('main')
 
 <div class="container-fluid d-flex justify-content-center align-items-center w-100" style="height: 80vh">
-    <div class="card shadow border p-5 d-flex justify-content-center align-items-center" style="width: 40%">
+    <div class="card shadow border p-5 d-flex justify-content-center align-items-center">
       <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 123 94.09" style="width: 100px">
             <defs>
               <style>

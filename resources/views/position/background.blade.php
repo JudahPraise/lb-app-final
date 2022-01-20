@@ -4,6 +4,17 @@
     @forelse ($qualified as $data)
         <span>
             <strong>{{ $data->qualification->title }}</strong>
+            <div class="btn dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+              </div>
+              <div class="dropdown-menu">
+                  <form action="{{ route('setQualifcation.delete', $data->qualification->id) }}" method="POST" id="deleteQualification">
+                    @csrf
+                    @method('DELETE')
+                </form>
+                <a class="dropdown-item delete-position"
+                id="skillDelete" onclick="document.getElementById('deleteQualification').submit()">Delete</a>
+              </div>
         </span>
         <span class="ml-3 font-italic d-flex justify-content-between">
              <strong class="text-danger">*Qualified: <span class="text-dark">{{ $data->qualified_option }}</span></strong>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Skill;
 use App\Models\Choice;
+use App\Models\Position;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class SkillController extends Controller
     public function index()
     {
         $skills = Skill::all();
-        return view('skills.index', compact('skills'));
+        $positions = Position::all();
+        return view('skills.index', compact('skills','positions'));
     }
 
     /**
@@ -41,6 +43,7 @@ class SkillController extends Controller
         Skill::create([
             'skill_title' => $request->skill_title,
             'description' => $request->description,
+            'tag' => $request->tag,
         ]);
 
         return redirect()->back()->with('success', 'Skill Added!');
@@ -82,6 +85,7 @@ class SkillController extends Controller
         Skill::where('id','=',$id)->update([
             'skill_title' => $request->skill_title,
             'description' => $request->description,
+            'tag' => $request->tag,
         ]);
 
         return redirect()->back()->with('update', 'Skill Updated!');

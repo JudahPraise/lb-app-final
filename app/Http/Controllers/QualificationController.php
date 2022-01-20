@@ -69,7 +69,8 @@ class QualificationController extends Controller
     public function edit($id)
     {
         $qualification = AddQualifications::where('id','=',$id)->first();
-        return view('qualification.edit', compact('qualification'));
+        $positions = Position::all();
+        return view('qualification.edit', compact('qualification','positions'));
     }
 
     /**

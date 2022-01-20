@@ -9,7 +9,7 @@ class Skill extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['skill_title','description','total_points'];
+    protected $fillable = ['tag','skill_title','description','total_points'];
 
     public function questions()
     {

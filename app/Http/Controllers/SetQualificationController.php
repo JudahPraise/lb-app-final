@@ -108,6 +108,7 @@ class SetQualificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SetQualification::where('id','=',$id)->delete();
+        return redirect()->back()->with('delete', 'Qualification deleted');
     }
 }

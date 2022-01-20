@@ -20,7 +20,8 @@ class SetSkillsController extends Controller
     public function index($id)
     {
         $position = Position::where('id','=',$id)->first();
-        $skills = Skill::with('questions.choices')->get();
+        
+        $skills = Skill::where('tag','=',$position->position)->orWhere('tag','=','All')->with('questions.choices')->get();
         // foreach($skills as $skill)
         // {
         //    foreach($skill->questions as $question)

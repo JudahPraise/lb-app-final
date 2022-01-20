@@ -91,11 +91,16 @@ class SkillsTest extends Controller
         $qualified_points = SetQualification::where('position_id','=',$id)->sum('point');
         $exam_points = SetSkill::where('position_id','=',$id)->sum('points');
         $results = Result::where('registration_id','=',$reg_id)->first();
-
+        $position_count = Position::all()->count();
+        $registration_count = Registration::where('id','=',$reg_id)->count();
         
 
-        if($results->qualification < $exam_points)
+        if($results->qualification < $qualified_points)
         {
+            if($registration_count ===  $position_count)
+            {
+                dd('you reach maximum try');
+            }
             return redirect()->route('other.position', ['id'=>$id, 'reg_id'=>$reg_id]);
         }
 

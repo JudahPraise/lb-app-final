@@ -11,7 +11,7 @@
       <div class="card-deck mb-3 text-center">
           @foreach ($schedules as $schedule)
           <a href="{{ route('interview.email',['id' => $position->id, 'reg_id' => $registration->id, 'sched_id' => $schedule->id]) }}" class="schedule-card text-dark">
-          <div class="card mb-4 shadow-sm">
+          <div class="card mb-4 shadow-sm" style="width: 20rem">
          
                   <div class="card-header bg-dark text-white">
                     <h4 class="my-0 font-weight-normal">{{ $schedule->getDay() }}</h4>

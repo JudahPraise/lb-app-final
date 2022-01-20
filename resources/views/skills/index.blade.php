@@ -29,6 +29,7 @@
                                   data-skillid="{{ $skill->id }}" 
                                   data-title="{{ $skill->skill_title }}" 
                                   data-description="{{ $skill->description }}"
+                                  data-tag="{{ $skill->tag }}"
                                   data-toggle="modal" data-target="#editSkillModal"
                                   >Edit</a>
                                   <a class="dropdown-item delete-skill"
@@ -81,6 +82,17 @@
                         <input type="text" class="form-control" name="skill_title" id="skill_title">
                       </div>
                       <div class="form-group">
+                        <label for="exampleInputEmail1">Tags</label>
+                        <select class="form-control" name="tag">
+                          <option value="All">All</option>
+                          @if (!empty($positions))
+                            @foreach ($positions as $position)
+                              <option value="{{ $position->position }}">{{ $position->position }}</option>
+                            @endforeach
+                          @endif
+                        </select>
+                      </div>
+                      <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                       </div>
@@ -111,6 +123,18 @@
                       <div class="form-group">
                         <label for="skill_title">Title</label>
                         <input type="text" class="form-control" name="skill_title" id="skillTitle">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Tags</label>
+                        <select class="form-control" name="tag" id="skilltag">
+                          <option id="tagSelected"></option>
+                          <option value="All">All</option>
+                          @if (!empty($positions))
+                            @foreach ($positions as $position)
+                              <option value="{{ $position->position }}">{{ $position->position }}</option>
+                            @endforeach
+                          @endif
+                        </select>
                       </div>
                       <div class="form-group">
                         <label for="description">Description</label>
@@ -161,6 +185,9 @@
             $('#editSkillForm').attr("action", "/skills/update/"+$(this).data('skillid')+"")
             $('#skillTitle').val($(this).data('title'));
             $('#skillDescription').val($(this).data('description'));
+            // $("#skilltag option[value="+$(this).data('tag')+"]").attr("selected", true);
+            $('#tagSelected').val($(this).data('tag'));
+            $('#tagSelected').text($(this).data('tag'));
           })
         })
         $('.delete-skill').each(function() {

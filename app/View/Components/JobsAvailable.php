@@ -24,7 +24,7 @@ class JobsAvailable extends Component
      */
     public function render()
     {
-        $positions = Position::all();
+        $positions = Position::with('qualifications','skills','schedule')->get();
         return view('components.jobs-available', compact('positions'));
     }
 }

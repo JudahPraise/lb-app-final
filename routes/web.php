@@ -38,6 +38,7 @@ Route::prefix('/position')->group(function(){
     //Set Background Qualification for Position
     Route::get('/{id}', [App\Http\Controllers\SetQualificationController::class, 'index'])->name('setQualifcation.index');
     Route::post('/set-background/{id}', [App\Http\Controllers\SetQualificationController::class, 'store'])->name('setQualifcation.store');
+    Route::delete('/delete/{id}', [App\Http\Controllers\SetQualificationController::class, 'destroy'])->name('setQualifcation.delete');
     //Set Skills Qualification for Position
     Route::get('/set-skills/{id}', [App\Http\Controllers\SetSkillsController::class, 'index'])->name('setSkills.index');
     Route::post('/add-skills/{id}', [App\Http\Controllers\SetSkillsController::class, 'store'])->name('setSkills.store');
