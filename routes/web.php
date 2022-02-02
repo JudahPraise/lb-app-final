@@ -28,21 +28,23 @@ Route::prefix('/dashboard')->group(function(){
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/show/{id}', [App\Http\Controllers\DashboardController::class, 'show'])->name('dashboard.show');
 });
+
 //Position
 Route::prefix('/position')->group(function(){
     Route::get('/', [App\Http\Controllers\PositionController::class, 'index'])->name('position.index');
     Route::post('/add', [App\Http\Controllers\PositionController::class, 'store'])->name('position.store');
     Route::put('/update/{id}', [App\Http\Controllers\PositionController::class, 'update'])->name('position.update');
-    Route::delete('/delete/{id}', [App\Http\Controllers\PositionController::class, 'destroy'])->name('position.destroy');
+    Route::delete('/delete/{id}', [App\Http\Controllers\PositionController::class, 'destroy'])->name('position.delete');
 
     //Set Background Qualification for Position
     Route::get('/{id}', [App\Http\Controllers\SetQualificationController::class, 'index'])->name('setQualifcation.index');
     Route::post('/set-background/{id}', [App\Http\Controllers\SetQualificationController::class, 'store'])->name('setQualifcation.store');
-    Route::delete('/delete/{id}', [App\Http\Controllers\SetQualificationController::class, 'destroy'])->name('setQualifcation.delete');
+    Route::delete('/qualification/delete/{id}', [App\Http\Controllers\SetQualificationController::class, 'destroy'])->name('setQualifcation.delete');
+
     //Set Skills Qualification for Position
     Route::get('/set-skills/{id}', [App\Http\Controllers\SetSkillsController::class, 'index'])->name('setSkills.index');
     Route::post('/add-skills/{id}', [App\Http\Controllers\SetSkillsController::class, 'store'])->name('setSkills.store');
-
+    Route::delete('/skill/delete/{id}', [App\Http\Controllers\SetSkillsController::class, 'destroy'])->name('setSkills.delete');
 
     //Qualification Show
     Route::get('/show-background/{id}', [App\Http\Controllers\SetQualificationController::class, 'show'])->name('setQualifcation.show');

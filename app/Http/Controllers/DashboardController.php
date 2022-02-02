@@ -53,7 +53,7 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        $applicant = Result::where('id','=',$id)->with('registration')->first();
+        $applicant = Result::where('registration_id','=',$id)->with('registration')->first();
         $position = Position::where('id','=',$applicant->position_id)->first();
         $interview = Schedule::where('id','=',$applicant->schedule_id)->first();
         $qualification = QualificationResult::where('registration_id','=',$id)->first();

@@ -122,6 +122,7 @@ class SetSkillsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SetSkill::where('id','=',$id)->delete();
+        return redirect()->back()->with('delete', 'Skill deleted!');
     }
 }

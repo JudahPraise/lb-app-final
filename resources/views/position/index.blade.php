@@ -37,7 +37,7 @@
                               >Edit</a>
                               <a class="dropdown-item delete-position"
                               id="skillDelete"
-                              data-toggle="modal" data-target="#deleteModal"
+                              data-toggle="modal" data-target="#positionDeleteModal"
                               data-positionid="{{ $position->id }}"
                               >Delete</a>
                             </div>
@@ -135,7 +135,7 @@
     </div>
 
     <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="positionDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -145,7 +145,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form method="POST" id="deleteForm">
+            <form method="POST" id="positionDeleteForm">
               @method('DELETE')
               @csrf
                 <div class="container">
@@ -155,7 +155,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteForm').submit()">Delete</button>
+            <button type="button" class="btn btn-danger" onclick="document.getElementById('positionDeleteForm').submit()">Delete</button>
           </div>
         </div>
       </div>
@@ -167,7 +167,7 @@
   $(document).ready(function(){
     $('.delete-position').each(function() {
       $(this).click(function(event){
-        $('#deleteForm').attr("action", "/position/delete/"+$(this).data('positionid')+"")
+        $('#positionDeleteForm').attr("action", "/position/delete/"+$(this).data('positionid')+"")
       })
     })
     $('.edit-position').each(function() {
