@@ -9,7 +9,7 @@ class Registration extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['firstname','lastname','middlename','dob','gender','contact_no','email_address', 'position_id'];
+    protected $fillable = ['firstname','lastname','middlename','dob','gender','contact_no','email_address', 'position_id', 'resume', 'resume_permission','interview_status'];
 
     public function getFullname()
     {
@@ -18,7 +18,6 @@ class Registration extends Model
 
     public function getPosition()
     {
-
         $position = Position::where('id','=',$this->position_id)->select('position')->first();
 
         return $position->position;

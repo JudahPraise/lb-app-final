@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Position;
 use App\Models\Schedule;
+use App\Models\Registration;
 use Illuminate\Http\Request;
 
 class InterviewController extends Controller
@@ -101,5 +102,26 @@ class InterviewController extends Controller
     {
         Schedule::where('id','=',$id)->delete();
         return redirect()->back()->with('delete', 'Schedule deleted!');
+    }
+
+    public function updateStatus($id, $status){
+
+        $newstatus = '';
+
+        if($status == 'A777')
+        {
+            $newstatus = 'Passed';
+        }
+        else
+        {
+            $newstatus = 'Failed';
+        }
+
+        Registration::where('id','=',$id)->update([
+            'interview_status' => $newstatus
+        ]);
+
+        return redirect()->back()->with('success', 'Registration status updated!');
+
     }
 }

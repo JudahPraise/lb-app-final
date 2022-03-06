@@ -24,6 +24,9 @@ class CreateRegistrationsTable extends Migration
             $table->string('email_address');
             $table->unsignedBigInteger('position_id')->nullable();
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
+            $table->string('interview_status')->nullable();
+            $table->mediumText('resume');
+            $table->boolean('resume_permission')->default(0);
             $table->timestamps();
         });
     }

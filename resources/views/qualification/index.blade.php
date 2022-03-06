@@ -36,6 +36,9 @@
                             </div>
                           </span>
                         </h5>
+                        <div>
+                          <p>Tag: {{ $qualification->tag }}</p>
+                        </div>
                         <strong>Qualified Options</strong>
                         <ul>
                             @foreach ($qualification->options as $option)

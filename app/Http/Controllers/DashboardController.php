@@ -9,6 +9,7 @@ use App\Models\SkillResult;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 use App\Models\QualificationResult;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -19,9 +20,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $passers = Result::where('schedule_id','!=',null)->with('registration','schedule')->get();
-        // dd($passers);
-        return view('dashboard.index', compact('passers'));
+        $passers = Result::with('registration','schedule')->get();
+        $applicants = Registration::count();
+        $positions = Position::all();
+        return view('dashboard.index', compact('passers', 'positions', 'applicants'));
+    }
+
+    public function filter()
+    {
+        // $registration = Registration::where()
     }
 
     /**
@@ -59,6 +66,11 @@ class DashboardController extends Controller
         $qualification = QualificationResult::where('registration_id','=',$id)->first();
         $exam = SkillResult::where('registration_id','=',$id)->first();
         return view('dashboard.show', compact('applicant', 'position', 'qualification','exam','interview'));
+    }
+
+    public function download($id){
+        $registration = Registration::where('id','=',$id)->first();
+        return response()->download(storage_path("app/public/documents/{$registration->resume}"));
     }
 
     /**

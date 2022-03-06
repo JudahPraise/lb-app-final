@@ -27,6 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('/dashboard')->group(function(){
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/show/{id}', [App\Http\Controllers\DashboardController::class, 'show'])->name('dashboard.show');
+    Route::get('/download/{id}', [App\Http\Controllers\DashboardController::class, 'download'])->name('resume.download');
 });
 
 //Position
@@ -105,11 +106,19 @@ Route::post('/skills-test/store/{id}/{reg_id}', [App\Http\Controllers\SkillsTest
 
 //Schedule
 Route::get('/schedule/{id}/{reg_id}', [App\Http\Controllers\ScheduleController::class, 'index'])->name('interview.Schedule');
+Route::post('/send-schedule/{reg_id}', [App\Http\Controllers\ElapsedInterview::class, 'sendSchedule'])->name('send.Schedule');
+Route::post('/send-second-interview/{reg_id}', [App\Http\Controllers\ElapsedInterview::class, 'sendSecondSchedule'])->name('send.second.interview');
 
 //Failed
 Route::get('/other-positions/{id}/{reg_id}', [App\Http\Controllers\OherPositionController::class, 'index'])->name('other.position');
 Route::get('/apply-other-position/{id}/{reg_id}', [App\Http\Controllers\OherPositionController::class, 'store'])->name('other.position.apply');
 
+//Interview status
+Route::get('/update-status/{id}/{status}', [App\Http\Controllers\InterviewController::class, 'updateStatus'])->name('interview.status');
+
+//Notify for new schedule
+Route::get('/notify-admin/{id}/{reg_id}', [App\Http\Controllers\ElapsedInterview::class, 'notify'])->name('elapsed.notify');
+Route::get('/back-to-home/notify', [App\Http\Controllers\ScheduleController::class, 'notify'])->name('thankyou.notify');
 //Route::get('/email', function(){
 //    Mail::to('guest@test.com')->send(new ScheduleMail());
 //    return new ScheduleMail();

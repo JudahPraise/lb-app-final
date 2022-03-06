@@ -8,6 +8,7 @@ use App\Models\Schedule;
 use App\Mail\ScheduleMail;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class ScheduleController extends Controller
@@ -20,10 +21,14 @@ class ScheduleController extends Controller
         $position = Position::where('id','=',$id)->first();
         $registration = Registration::where('id','=',$reg_id)->first();
         $schedules = Schedule::where('position_id','=',$id)->get();
-
+        $recent_schedule = Schedule::where('position_id','=',$id)->orderBy('date', 'desc')->first();
         
-        //dd($schedules);
-        return view('guest-page.schedule-page', compact('position', 'registration','schedules'),);
+        // if($recent_schedule->date <= Carbon::now()->format('Y-m-d')){
+        //     dd('elapsed');
+        // }
+
+        // dd('not');
+        return view('guest-page.schedule-page', compact('position', 'registration','schedules', 'recent_schedule'),);
         
     }
 
@@ -40,6 +45,10 @@ class ScheduleController extends Controller
         $name = $registration->firstname;
         $time = $schedule->getTime();
 
+        $registration->update([
+            'interview_status' => "Waiting for Schedule"
+        ]);
+
         Mail::to($registration->email_address)->send(new ScheduleMail($job, $link, $date, $name, $time));
 
         Result::where('registration_id','=',$reg_id)->update([
@@ -53,6 +62,11 @@ class ScheduleController extends Controller
     public function thankyou()
     {
         return view('guest-page.thankyou-page');
+    }
+
+    public function notify()
+    {
+        return view('guest-page.notify-page');
     }
 
 }
