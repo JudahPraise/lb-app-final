@@ -136,7 +136,8 @@ class SkillsTest extends Controller
         $registration_count = Registration::where('email_address','=',$registration->email_address)->count();
         $position_count = Position::all()->count();
         // dd($registration_count);
-        //Fail qualification
+
+        //Fail qualification /
         if($results->qualification < $qualified_points)
         {
             if($registration_count >=  $position_count)
@@ -145,7 +146,7 @@ class SkillsTest extends Controller
             }
             return redirect()->route('other.position', ['id'=>$pos_id, 'reg_id'=>$reg_id]);
         }
-        //Fail skill test
+        //Fail skill test 
         else if($score < $qualified_score->points)
         {
             if($registration_count >=  $position_count)

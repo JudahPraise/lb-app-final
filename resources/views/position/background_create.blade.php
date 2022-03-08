@@ -4,6 +4,7 @@
 <form action="{{ route('setQualifcation.store', $position->id) }}" method="POST">
     @csrf
     @forelse ($qualifications as $qualification)
+    @if(!$currentQualification->contains('qualification_id', $qualification->id))
     <div class="accordion" id="accordionExample">
         <div class="card m-3">
             <div class="card-header d-flex justify-content-between" id="heading{{ $loop->index }}">
@@ -21,13 +22,13 @@
                         <fieldset>
                             @foreach($qualification->options as $option)
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="{{ $qualification->title }}  "id="exampleRadios1"  value="{{ $option['option'] }}"
+                                    <input class="form-check-input" type="radio" name="{{ $qualification->id }}  "id="exampleRadios1"  value="{{ $option['option'] }}"
                                         data-qualified="{{ $option['option'] }}"
                                         data-point="{{ $option['point'] }}"
                                         data-id="{{ $qualification->id }}"
                                         data-positionid="{{ $position->id }}"
                                     >
-                                    <label class="form-check-label" for="{{ $qualification->title }}">
+                                    <label class="form-check-label" for="{{ $qualification->id }}">
                                         {{ $option['option'] }}
                                     </label>
                                 </div> 
@@ -37,6 +38,7 @@
                 </div>
             </div>
         </div>
+    @endif
         @empty
             <div class="container-fluid d-flex flex-column align-items-center" data-toggle="modal" data-target="#exampleModal">
                 <img src="{{ asset('svg/undraw_empty_street.svg') }}" alt="" srcset="" height="250" width="250">
