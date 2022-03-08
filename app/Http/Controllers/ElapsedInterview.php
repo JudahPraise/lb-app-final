@@ -9,6 +9,7 @@ use App\Mail\NewInterview;
 use App\Mail\ScheduleMail;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Mail\ElapsedScheduleMail;
 use Illuminate\Support\Facades\Mail;
 
@@ -43,64 +44,78 @@ class ElapsedInterview extends Controller
     public function sendSchedule(Request $request, $id)
     {
         $registration = Registration::where('id','=',$id)->with('result')->first();
+        $now = Carbon::now()->format('Y-m-d');
 
-        $schedule = Schedule::create([
-            'position_id' => $registration->position_id,
-            'date' => $request->date,
-            'time_from' => $request->time_from,
-            'time_to' => $request->time_to,
-            'link' => $request->link
-        ]);
+        if($request->date > $now)
+        {  
+            $schedule = Schedule::create([
+                'position_id' => $registration->position_id,
+                'date' => $request->date,
+                'time_from' => $request->time_from,
+                'time_to' => $request->time_to,
+                'link' => $request->link
+            ]);
 
-        $registration->result->update([
-            'schedule_id' => $schedule->id,
-        ]);
-
-        $registration->update([
-            'interview_status' => "Waiting for Interview"
-        ]);
-
-        $job = $registration->getPosition();
-        $link = $schedule->link;
-        $date = $schedule->getDate();
-        $name = $registration->firstname;
-        $time = $schedule->getTime();
-
-        Mail::to($registration->email_address)->send(new NewInterview($job, $link, $date, $name, $time));
-
-        return redirect()->back()->with('success', 'New schedule sent');
+            $registration->result->update([
+                'schedule_id' => $schedule->id,
+            ]);
+    
+            $registration->update([
+                'interview_status' => "Waiting for Interview"
+            ]);
+    
+            $job = $registration->getPosition();
+            $link = $schedule->link;
+            $date = $schedule->getDate();
+            $name = $registration->firstname;
+            $time = $schedule->getTime();
+    
+            Mail::to($registration->email_address)->send(new NewInterview($job, $link, $date, $name, $time));
+    
+            return redirect()->back()->with('success', 'New schedule sent');
+        }
+        
+        return redirect()->back()->with('delete', 'Invalid date!');
+    
 
     }
 
     public function sendSecondSchedule(Request $request, $id)
     {
         $registration = Registration::where('id','=',$id)->with('result')->first();
+        $registration = Registration::where('id','=',$id)->with('result')->first();
+        $now = Carbon::now()->format('Y-m-d');
 
-        $schedule = Schedule::create([
-            'position_id' => $registration->position_id,
-            'date' => $request->date,
-            'time_from' => $request->time_from,
-            'time_to' => $request->time_to,
-            'link' => $request->link
-        ]);
+        if($request->date > $now)
+        { 
+            $schedule = Schedule::create([
+                'position_id' => $registration->position_id,
+                'date' => $request->date,
+                'time_from' => $request->time_from,
+                'time_to' => $request->time_to,
+                'link' => $request->link
+            ]);
 
-        $registration->result->update([
-            'schedule_id' => $schedule->id,
-        ]);
-
-        $registration->update([
-            'interview_status' => "Waiting for Interview"
-        ]);
-
-        $job = $registration->getPosition();
-        $link = $schedule->link;
-        $date = $schedule->getDate();
-        $name = $registration->firstname;
-        $time = $schedule->getTime();
-
-        Mail::to($registration->email_address)->send(new SecondInterview($job, $link, $date, $name, $time));
-
-        return redirect()->back()->with('success', 'New schedule sent');
+            $registration->result->update([
+                'schedule_id' => $schedule->id,
+            ]);
+    
+            $registration->update([
+                'interview_status' => "Waiting for Interview"
+            ]);
+    
+            $job = $registration->getPosition();
+            $link = $schedule->link;
+            $date = $schedule->getDate();
+            $name = $registration->firstname;
+            $time = $schedule->getTime();
+    
+            Mail::to($registration->email_address)->send(new SecondInterview($job, $link, $date, $name, $time));
+    
+            return redirect()->back()->with('success', 'New schedule sent');
+        }
+        
+        return redirect()->back()->with('delete', 'Invalid date!');
 
     }
 }

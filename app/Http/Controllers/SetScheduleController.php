@@ -37,15 +37,24 @@ class SetScheduleController extends Controller
      */
     public function store(Request $request, $id)
     {
-        Schedule::create([
-            'position_id' => $request->position_id,
-            'date' => $request->date,
-            'time_from' => $request->time_from,
-            'time_to' => $request->time_to,
-            'link' => $request->link
-        ]);
 
-        return redirect()->back()->with('success', 'Schedule added!');
+        $now = Carbon::now()->format('Y-m-d');
+
+        if($request->date > $now)
+        {  
+            Schedule::create([
+                'position_id' => $request->position_id,
+                'date' => $request->date,
+                'time_from' => $request->time_from,
+                'time_to' => $request->time_to,
+                'link' => $request->link
+            ]);
+    
+            return redirect()->back()->with('success', 'Schedule added!');
+        }
+        
+        return redirect()->back()->with('delete', 'Invalid date!');
+       
     }
 
     /**

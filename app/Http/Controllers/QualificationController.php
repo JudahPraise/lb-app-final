@@ -85,6 +85,7 @@ class QualificationController extends Controller
         AddQualifications::where('id','=',$id)->update([
             'title' => $request->title,
             'options' => $request->options,
+            'tag' => $request->tag
         ]);
 
         return redirect()->route('qualification.index')->with('update', 'Qualification udpated!');

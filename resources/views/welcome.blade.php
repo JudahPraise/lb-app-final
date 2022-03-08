@@ -28,6 +28,7 @@
 
        <div class="container-fluid p-0 d-flex flex-column">
             <x-top-bar />
+            @component('components.alerts')@endcomponent
             @yield('main')
        </div>
 

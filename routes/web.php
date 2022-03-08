@@ -101,8 +101,10 @@ Route::get('/add-qualification/{id}/{reg_id}', [App\Http\Controllers\ApplicantQu
 Route::get('/send-qualification/{id}/{reg_id}', [App\Http\Controllers\ApplicantQualification::class, 'store'])->name('applicant.qualification.result');
 
 //Applicant Exams
-Route::get('/skills-test/{id}/{reg_id}', [App\Http\Controllers\SkillsTest::class, 'index'])->name('applicant.skillstest');
 Route::post('/skills-test/store/{id}/{reg_id}', [App\Http\Controllers\SkillsTest::class, 'store'])->name('applicant.skillstest.store');
+Route::post('/skill-test/submit/{pos_id}/{reg_id}/{score}/{skill_id}', [App\Http\Controllers\SkillsTest::class, 'submitTest'])->name('applicant.skillTest.submit');
+Route::post('/skill-score', [App\Http\Controllers\SkillsTest::class, 'skillScore'])->name('applicant.skillScore.submit');
+Route::get('/skills-test/{id}/{reg_id}', [App\Http\Controllers\SkillsTest::class, 'index'])->name('applicant.skillstest');
 
 //Schedule
 Route::get('/schedule/{id}/{reg_id}', [App\Http\Controllers\ScheduleController::class, 'index'])->name('interview.Schedule');

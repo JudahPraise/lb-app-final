@@ -29,10 +29,10 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tags</label>
                             <select class="form-control" name="tag">
-                              <option value="All" {{ $qualification->tag == "All"}}>All</option>
+                              <option value="All">All</option>
                               @if (!empty($positions))
                                 @foreach ($positions as $position)
-                                  <option value="{{ $position->position }}" {{ $qualification->tag == $position->position }}>{{ $position->position }}</option>
+                                  <option value="{{ $position->position }}" {{ $position->tag == $qualification->tag ? 'selected' : ''}}>{{ $position->position }}</option>
                                 @endforeach
                               @endif
                             </select>

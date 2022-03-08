@@ -1,9 +1,9 @@
 @extends('welcome')
 
 @section('main')
-<div class="container">
+<div class="container"></div>
   @component('components.alerts')@endcomponent
-  <div class="row">
+  <div class="row w-75">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
@@ -16,88 +16,95 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 mb-3">
-      <h3>Skills</h3>
-      <div class="list-group" id="list-tab" role="tablist">
-        @foreach ($skills as $skill)
-          <a class="list-group-item list-group-item-action {{ $answers->contains('skill_id', $skill->id) ? 'bg-success' : '' }} {{ $loop->index === 0 ? 'active' : '' }}" id="list-{{ $skill->id }}-list" data-toggle="list" href="#list-{{ $skill->id }}" role="tab" aria-controls="{{ $skill->id }}">{{ $skill->skills->skill_title }}</a>
-        @endforeach
-      </div>
-      <div class="row">
-        <p class="text-muted font-italic"><span class="text-danger">*</span>Important</p>
-        <p class="text-muted font-italic">Kindly answer all the questions per skill sets.</p>
-      </div>
+    <div class="skills">
+      <form id="skillScoreForm">
+        <input type="text" id="skillScore" hidden>
+      </form>
     </div>
-    <div class="col-md-8">
-      <h3>Test Form</h3>
-      <div class="tab-content" id="nav-tabContent">
+    <div class="row flex-column w-100 pb-0 py-3">
+      <form class="w-100" method="POST" id="skillTestSubmit">
+        @csrf
         @foreach ($skills as $skill)
-          <div class="tab-pane fade show {{ $loop->index === 0 ? 'active' : '' }}" id="list-{{ $skill->id }}" role="tabpanel"   aria-labelledby="list-{{ $skill->id }}-list">
-            <div class="card w-100">
-              <div class="card-body">
-                <form action="{{ route('applicant.skillstest.store', ['id' => $position->id, 'reg_id' => $registration->id]) }}" method="POST">
-                    @csrf
-                    <div class="row row-cols-1 row-cols-md-2 d-flex flex-column">
-                      <div id="inputContainer">  
-                        <input type="text" id="id" name="skill_id" value="{{ $skill->skills->id }}" hidden>                
-                      </div>
-                      @forelse ($skill->skills->questions as $question)
-                      <span class="mb-2">
-                        <strong>Question #{{ $loop->index+1 }}</strong>
-                        <h4 class="mt-2" style="font-size: 1rem; font-weight: bold">{{ $question->question }}</h4>
-                      </span>
-                      <span>
-                        <ul id="question{{ $question->id }}">
-                          <input type="number" id="id" name="question_id" value="{{ $question->id }}" hidden>     
-                          <input type="number" id="choiceId{{ $question->id }}" name="choice_id[]" value="" hidden>     
-                          @foreach ($question->choices as $choice)
-                            <div class="form-check">
-                              <input class="form-check-input choice" type="radio" name="{{ $question->id }}" id="{{   $choice->choice }}" value="{{ $choice->points }}" data-questionid="{{ $question->id }}"   data-choiceid="{{ $choice->id }}" {{ $answers->contains('choice_id', $choice->id) ? 'checked' : '' }} >
-                              <label class="form-check-label" for="{{ $choice->choice }}">
-                                {{ $choice->choice }}
-                              </label>
-                            </div>
-                          @endforeach
-                        </ul>
-                      </span>
-                     @endforeach
+          <div class="row d-flex flex-column m-0 p-0 w-100">
+            <h3>{{ $skill->skills->skill_title }}</h3>
+            <div class="row d-flex flex-column justify-content-start w-100 m-0 p-0">
+              @foreach ($skill->skills->questions as $question)
+                <div class="row p-0 d-flex flex-column justify-content-start w-100 {{ $loop->index < $loop->count ? 'mb-5' : '' }}">
+                  <strong>Question #{{ $loop->index+1 }}</strong>
+                  <p>{{ $question->question }}</p>
+                  @foreach ($question->choices as $choice)
+                    <div class="form-check">
+                      <input class="form-check-input choice-input" type="radio" id="{{ $skill->skills->skill_title }}" data-posid="{{ $position->id }}" data-regid="{{ $registration->id }}" data-skill="{{ $question->skill_id }}" name="{{ $question->question }}" value="{{ $choice->points }}" id="defaultCheck1">
+                      <label class="form-check-label" for="defaultCheck1">
+                        {{ $choice->choice }}
+                      </label>
                     </div>
-                      <button class="btn btn-primary float-right" type="submit">Submit</button>
-                </form>
-              </div>
+                  @endforeach
+                </div>
+              @endforeach
             </div>
           </div>
-          @endforeach
-      </div>
+          @if($skills->hasMorePages())
+            <div class="row w-100 d-flex justify-content-between m-o p-0">
+              <a class="btn btn-primary text-white" href="{{ $skills->previousPageUrl() }}" rel="next">Previous</a>
+              <p>Skill {{ $skills->currentPage() }}</p>
+              <a class="btn btn-primary text-white"  id="nextBtn" rel="next" >Next</a>
+            </div>
+          @else
+            <div class="row w-100 d-flex justify-content-between m-o p-0">
+              <a class="btn btn-primary text-white" href="{{ $skills->previousPageUrl() }}" rel="next">Previous</a>
+              <p>Skill {{ $skills->currentPage() }}</p>
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+          @endif
+          <hr>
+        @endforeach
+      </form>
     </div>
   </div>
 </div>
-
 <script src="{{ asset('jquery/jquery.js') }}"></script>
 <script>
     $(document).ready(function(){
-      $('.choice').each(function() {
-        $(this).click(function(event){
-          // points.push($(this).val())
-          // var total = 0;
-          // for (var i = 0; i < points.length; i++) {
-          //     total += points[i] << 0;
-          // }
-          // $('#totalPoint').val(total);
-          // console.log(total);
-          $('#point'+$(this).data('questionid')+'').remove();
-          var html = '<input type="number" id="point'+$(this).data('questionid')+'" name="point[]" value="'+$(this).val()+'" hidden>'
-          $('#question'+$(this).data('questionid')+'').append(html);
-          $('#choiceId'+$(this).data('questionid')+'').val($(this).data('choiceid'));
+      let score = 0;
+      let skillId = 0;
+      let regId = 0;
+
+      $('.choice-input').each(function(){
+        $(this).click(function(){
+          score += parseInt($(this).val());
+          skillId = $(this).data('skill');
+          regId = $(this).data('regid');
+          console.log(skillId);
+          $('#skillScore').val(score);
+          $('#skillTestSubmit').attr('action', "/skill-test/submit/"+$(this).data('posid')+"/"+$(this).data('regid')+"/"+score+"/"+$(this).data('skill')+"");
         })
+      });
+      $('#nextBtn').click(function(e){
+        e.preventDefault()
+        var points = score;
+        var skill_id = skillId;
+        var registration_id = regId;
+        // location = href="{{ $skills->nextPageUrl() }}"
+        // $('#skillTestSubmit').attr('action', "/skill-score/"+skillId+"/"+regId+"/"+score+"");
+        // $('#skillTestSubmit').submit();
+        $.ajax({
+          url: "/skill-score",
+          type: "POST",
+          data: {
+              _token: "{{csrf_token()}}",
+              registration_id: regId,
+              skill_id: skillId,
+              points: score,
+          },
+          cache: false,
+          success: function(dataResult){
+            window.location.href="{{ $skills->nextPageUrl() }}"	
+          }
+        });
       })
 
-      function setPoint(question, point)
-      {
-        $('#point'+question+'').val() = "";
-      }
-    })
+
+    });
 </script>
 @endsection

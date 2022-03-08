@@ -6,6 +6,7 @@ use App\Models\Position;
 use App\Models\Schedule;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class InterviewController extends Controller
 {
@@ -39,15 +40,22 @@ class InterviewController extends Controller
      */
     public function store(Request $request)
     {
-        Schedule::create([
-            'position_id' => $request->position_id,
-            'date' => $request->date,
-            'time_from' => $request->time_from,
-            'time_to' => $request->time_to,
-            'link' => $request->link
-        ]);
+        $now = Carbon::now()->format('Y-m-d');
 
-        return redirect()->back()->with('success', 'Schedule added!');
+        if($request->date > $now)
+        {  
+            Schedule::create([
+                'position_id' => $request->position_id,
+                'date' => $request->date,
+                'time_from' => $request->time_from,
+                'time_to' => $request->time_to,
+                'link' => $request->link
+            ]);
+
+            return redirect()->back()->with('success', 'Schedule added!');        
+        }
+        
+        return redirect()->back()->with('delete', 'Invalid date!');
     }
 
     /**
@@ -81,15 +89,22 @@ class InterviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Schedule::where('id','=',$id)->update([
-            'position_id' => $request->position_id,
-            'date' => $request->date,
-            'time_from' => $request->time_from,
-            'time_to' => $request->time_to,
-            'link' => $request->link
-        ]);
+        $now = Carbon::now()->format('Y-m-d');
 
-        return redirect()->back()->with('update', 'Schedule updated!');
+        if($request->date > $now)
+        {  
+            Schedule::where('id','=',$id)->update([
+                'position_id' => $request->position_id,
+                'date' => $request->date,
+                'time_from' => $request->time_from,
+                'time_to' => $request->time_to,
+                'link' => $request->link
+            ]);
+        
+            return redirect()->back()->with('update', 'Schedule updated!');
+        }
+        
+        return redirect()->back()->with('delete', 'Invalid date!');
     }
 
     /**

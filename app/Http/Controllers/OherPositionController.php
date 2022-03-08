@@ -28,6 +28,7 @@ class OherPositionController extends Controller
             'gender' => $registration->gender,
             'contact_no' => $registration->contact_no,
             'email_address' => $registration->email_address, 
+            'resume' => $registration->resume,
             'position_id' => $id
         ]);
 

@@ -30,6 +30,7 @@
 @endsection
 
 @section('content')
+@component('components.alerts')@endcomponent
 <div class="container d-flex justify-content-center align-items-center w-100">
     <div class="row w-100">
         <div class="col-lg-5 mb-3">
