@@ -41,13 +41,24 @@
                 <div class="row d-flex justify-content-center mb-3" style="font-family: 'Poppins', sans-serif;">
                     <div class="col-md-4 d-flex flex-column justify-content-center align-items-center m-2">
                         <h1 style="font-size: 2.5rem; font-weight: bold; ">{{ $applicant->qualification }}</h1>
-                        <p class="font-weight-bold text-success" style="text-transform: uppercase">{{ $qualification->status }}</p>
+                        <p class="font-weight-bold text-success" style="text-transform: uppercase">Qualification</p>
                     </div>
                     <div class="col-md-4 d-flex flex-column justify-content-center align-items-center m-2">
                         <h1 style="font-size: 2.5rem; font-weight: bold; ">{{ $applicant->exam }}</h1>
-                        <p class="font-weight-bold text-success" style="text-transform: uppercase">{{ $exam->status }}</p>
+                        <p class="font-weight-bold text-success" style="text-transform: uppercase">Skills</p>
                     </div>
                 </div>
+                
+                <ul class="list-group w-100 mb-3">
+                   @foreach ($exam as $data)
+                    @if ($loop->index + 1 <= $data->skill->count())
+                        <li class="list-group-item d-flex justify-content-between">
+                            <h5 class="font-weight-bold p-0">{{ $data->skill->skill_title }}</h5>
+                            <h5 class="font-weight-bold p-0 {{ $data->points < $data->skill->total_points ? 'text-danger' : 'text-success'}}">{{ $data->points.'/'.$data->skill->total_points }}</h5>
+                        </li>
+                    @endif
+                   @endforeach
+                </ul>
         
                 <div class="row d-flex flex-column align-items-center mb-3">
                     <p style="font-size: 1.4rem; font-weight: bold;"">Interview</p>

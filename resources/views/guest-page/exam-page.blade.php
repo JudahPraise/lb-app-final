@@ -54,7 +54,7 @@
             <div class="row w-100 d-flex justify-content-between m-o p-0">
               <a class="btn btn-primary text-white" href="{{ $skills->previousPageUrl() }}" rel="next">Previous</a>
               <p>Skill {{ $skills->currentPage() }}</p>
-              <button class="btn btn-primary" type="submit">Submit</button>
+              <button class="btn btn-primary" id="submitBtn">Submit</button>
             </div>
           @endif
           <hr>
@@ -75,7 +75,6 @@
           score += parseInt($(this).val());
           skillId = $(this).data('skill');
           regId = $(this).data('regid');
-          console.log(skillId);
           $('#skillScore').val(score);
           $('#skillTestSubmit').attr('action', "/skill-test/submit/"+$(this).data('posid')+"/"+$(this).data('regid')+"/"+score+"/"+$(this).data('skill')+"");
         })
@@ -100,6 +99,27 @@
           cache: false,
           success: function(dataResult){
             window.location.href="{{ $skills->nextPageUrl() }}"	
+          }
+        });
+      })
+
+      $('#submitBtn').click(function(){
+        var points = score;
+        var skill_id = skillId;
+        var registration_id = regId;
+
+        $.ajax({
+          url: "/skill-score",
+          type: "POST",
+          data: {
+              _token: "{{csrf_token()}}",
+              registration_id: regId,
+              skill_id: skillId,
+              points: score,
+          },
+          cache: false,
+          success: function(dataResult){
+            $('#skillTestSubmit').submit();
           }
         });
       })

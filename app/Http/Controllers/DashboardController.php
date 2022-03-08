@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Skill;
 use App\Models\Result;
 use App\Models\Position;
 use App\Models\Schedule;
@@ -64,8 +65,9 @@ class DashboardController extends Controller
         $position = Position::where('id','=',$applicant->position_id)->first();
         $interview = Schedule::where('id','=',$applicant->schedule_id)->first();
         $qualification = QualificationResult::where('registration_id','=',$id)->first();
-        $exam = SkillResult::where('registration_id','=',$id)->first();
-        return view('dashboard.show', compact('applicant', 'position', 'qualification','exam','interview'));
+        $exam = SkillResult::where('registration_id','=',$id)->with('skill')->get();
+        $skills = Skill::all();
+        return view('dashboard.show', compact('applicant', 'position', 'qualification','exam','interview', 'skills'));
     }
 
     public function download($id){

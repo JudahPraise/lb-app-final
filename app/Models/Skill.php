@@ -20,4 +20,9 @@ class Skill extends Model
     {
         return $this->hasMany(SetSkill::class, 'skill_id');
     }
+
+    public function skillScore()
+    {
+        return $this->hasOne(SkillResult::class, 'skill_id');
+    }
 }
