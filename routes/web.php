@@ -130,3 +130,4 @@ Route::get('/back-to-home/notify', [App\Http\Controllers\ScheduleController::cla
 Route::get('/registration-succesfull/{id}/{reg_id}/{sched_id}', [App\Http\Controllers\ScheduleController::class, 'getInterview'])->name('interview.email');
 Route::get('/back-to-home', [App\Http\Controllers\ScheduleController::class, 'thankyou'])->name('thankyou.index');
 
+Route::get('/analytics', [App\Http\Controllers\AnalyticController::class, 'index'])->name('analytics.index');

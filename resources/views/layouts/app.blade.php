@@ -66,6 +66,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('interview.index') }}">Interview</a>
                             </li>
+                            </li><li class="nav-item">
+                                <a class="nav-link" href="{{ route('analytics.index') }}">Analytics</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -93,7 +96,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" defer></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" defer></script>
     <script src="{{ asset('jquery/jquery.js') }}"></script>
     <script src="{{ asset('vendor/datatables/datatables.min.js') }}" defer></script>
     <script src="{{ asset('vendor/datatables/dataTables.responsive.min.js') }}" defer></script>
