@@ -6,6 +6,7 @@ use App\Models\Skill;
 use App\Models\Result;
 use App\Models\Position;
 use App\Models\Schedule;
+use App\Models\SetSkill;
 use App\Models\SkillResult;
 use App\Models\Registration;
 use Illuminate\Http\Request;
@@ -67,7 +68,8 @@ class DashboardController extends Controller
         $qualification = QualificationResult::where('registration_id','=',$id)->first();
         $exam = SkillResult::where('registration_id','=',$id)->with('skill')->get();
         $skills = Skill::all();
-        return view('dashboard.show', compact('applicant', 'position', 'qualification','exam','interview', 'skills'));
+        $skillRequiredScore = SetSkill::where('position_id','=',$applicant->position_id)->sum('points');
+        return view('dashboard.show', compact('applicant', 'position', 'qualification','exam','interview', 'skills','skillRequiredScore'));
     }
 
     public function download($id){

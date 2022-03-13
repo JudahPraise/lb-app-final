@@ -122,14 +122,9 @@ class SkillsTest extends Controller
             $status = 'failed';
         }
 
-        SkillResult::create([
-            'registration_id' => $reg_id,
-            'skill_id' => 1,
-            'points' => $score,
-            'status' => $status,
-        ]);
+        $skillScore = SkillResult::where([['registration_id','=',$reg_id], ['position_id','=',$pos_id]])->sum('points');
 
-        Result::where('registration_id','=',$reg_id)->update(['exam'=> $score]);
+        Result::where('registration_id','=',$reg_id)->update(['exam'=> $skillScore]);
 
         $results = Result::where('registration_id','=',$reg_id)->first();
         $qualified_points = SetQualification::where('position_id','=',$pos_id)->sum('point');
@@ -180,6 +175,7 @@ class SkillsTest extends Controller
 
         $skillresult = SkillResult::create([
             'registration_id' => $request->registration_id,
+            'position_id' => $request->position_id,
             'skill_id' => $request->skill_id,
             'points' => $request->points,
             'status' => $status

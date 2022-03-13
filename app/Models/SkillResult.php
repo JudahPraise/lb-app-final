@@ -9,7 +9,7 @@ class SkillResult extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['registration_id','skill_id','points','status'];
+    protected $fillable = ['registration_id','position_id','skill_id','points','status'];
 
     public function skill(){
         return $this->belongsTo(Skill::class, 'skill_id');

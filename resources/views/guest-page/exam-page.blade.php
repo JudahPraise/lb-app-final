@@ -18,7 +18,7 @@
     </div>
     <div class="skills">
       <form id="skillScoreForm">
-        <input type="text" id="skillScore" hidden>
+        <input type="text" id="skillScore">
       </form>
     </div>
     <div class="row flex-column w-100 pb-0 py-3">
@@ -69,44 +69,52 @@
       let score = 0;
       let skillId = 0;
       let regId = 0;
+      let totalScore = 0;
+      let posId = 0;
 
       $('.choice-input').each(function(){
         $(this).click(function(){
-          score += parseInt($(this).val());
+          totalScore += parseInt($(this).val());
+          score = $(this).val();
           skillId = $(this).data('skill');
           regId = $(this).data('regid');
-          $('#skillScore').val(score);
-          $('#skillTestSubmit').attr('action', "/skill-test/submit/"+$(this).data('posid')+"/"+$(this).data('regid')+"/"+score+"/"+$(this).data('skill')+"");
+          posId = $(this).data('posid');
+          $('#skillScore').val(totalScore);
+
+          $('#skillTestSubmit').attr('action', "/skill-test/submit/"+$(this).data('posid')+"/"+$(this).data('regid')+"/"+totalScore+"/"+$(this).data('skill')+"");
         })
       });
       $('#nextBtn').click(function(e){
         e.preventDefault()
-        var points = score;
+        var points = totalScore;
         var skill_id = skillId;
         var registration_id = regId;
-        // location = href="{{ $skills->nextPageUrl() }}"
-        // $('#skillTestSubmit').attr('action', "/skill-score/"+skillId+"/"+regId+"/"+score+"");
-        // $('#skillTestSubmit').submit();
+        var position_id = posId;
+
         $.ajax({
           url: "/skill-score",
           type: "POST",
           data: {
               _token: "{{csrf_token()}}",
               registration_id: regId,
+              position_id: posId,
               skill_id: skillId,
-              points: score,
+              points: totalScore,
           },
           cache: false,
           success: function(dataResult){
+            console.log(dataResult);
             window.location.href="{{ $skills->nextPageUrl() }}"	
           }
         });
       })
 
-      $('#submitBtn').click(function(){
-        var points = score;
+      $('#submitBtn').click(function(e){
+        e.preventDefault()
+        var points = totalScore;
         var skill_id = skillId;
         var registration_id = regId;
+        var position_id = posId;
 
         $.ajax({
           url: "/skill-score",
@@ -115,11 +123,13 @@
               _token: "{{csrf_token()}}",
               registration_id: regId,
               skill_id: skillId,
-              points: score,
+              position_id: posId,
+              points: totalScore,
           },
           cache: false,
           success: function(dataResult){
             $('#skillTestSubmit').submit();
+            console.log(dataResult);
           }
         });
       })

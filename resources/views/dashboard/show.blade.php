@@ -41,14 +41,24 @@
                 <div class="row d-flex justify-content-center mb-3" style="font-family: 'Poppins', sans-serif;">
                     <div class="col-md-4 d-flex flex-column justify-content-center align-items-center m-2">
                         <h1 style="font-size: 2.5rem; font-weight: bold; ">{{ $applicant->qualification }}</h1>
-                        <p class="font-weight-bold text-success" style="text-transform: uppercase">Qualification</p>
+                        <p class="font-weight-bold text-success text-center" style="text-transform: uppercase">Qualification Score</p>
                     </div>
                     <div class="col-md-4 d-flex flex-column justify-content-center align-items-center m-2">
                         <h1 style="font-size: 2.5rem; font-weight: bold; ">{{ $applicant->exam }}</h1>
-                        <p class="font-weight-bold text-success" style="text-transform: uppercase">Skills</p>
+                        <p class="font-weight-bold text-success text-center" style="text-transform: uppercase">Skill Score</p>
                     </div>
                 </div>
-                
+
+                <div class="row w-100 mb-3 d-flex justify-content-between">
+                    <h3 style="font-size: 1rem; font-weight: bold;">Qualification Status:</h3>
+                    <h3 class="{{ $qualification->status == "Underqualified" ? 'text-danger' : 'text-success' }}" style="font-size: 1rem; font-weight: bold;">{{ $qualification->status }}</h3>
+                </div>
+
+                <div class="row w-100 d-flex justify-content-between">
+                    <h3 style="font-size: 1rem; font-weight: bold; ">SKILLS</h3>
+                    <h3 style="font-size: 1rem; font-weight: bold; ">SCORE/ITEM</h3>
+                </div>
+
                 <ul class="list-group w-100 mb-3">
                    @foreach ($exam as $data)
                     @if ($loop->index + 1 <= $data->skill->count())

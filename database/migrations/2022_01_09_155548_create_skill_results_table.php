@@ -17,6 +17,8 @@ class CreateSkillResultsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('registration_id')->nullable();
             $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
+            $table->unsignedBigInteger('position_id');
+            $table->foreign('position_id')->references('id')->on('positions');
             $table->unsignedBigInteger('skill_id');
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
             $table->integer('points');
