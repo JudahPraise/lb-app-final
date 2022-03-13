@@ -23,20 +23,32 @@ class AnalyticController extends Controller
         ->groupBy(DB::raw("Month(created_at)"))
         ->pluck('month');
 
+//dd($months->count());
+$c = 0;
+$m = [];
+        for($i = 0; $i < $months->count(); $i++){
+    
+           array_push($m,$months[$c]-1);
+           $c++;
+        }
+     
         
-        
+       
         $month = array(0,0,0,0,0,0,0,0,0,0,0,0);
-        foreach($months as $index => $months){
-            $month[$months] = $users[$index];
+        foreach($m as $index => $m){
+
+            
+       
+            $month[$m] = $users[$index];
+          
         } 
+
      $sex=[
          '0' => $male,
          '1' => $female,
      ];
      
-      
-     //dd($month); 
-
+    
        return view('analytic.index',compact('sex','month'));
     }
 }
